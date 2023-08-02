@@ -1,38 +1,11 @@
-# create-svelte
+# SvelteKit, Hasura & NHost Stack
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+* NHost Auth SignUp & SignOut implemented
 
-## Creating a project
+## TODO
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Error: Not found: /local/v1/auth/token
+    at resolve (C:/git/course/sveltekit-hasura/node_modules/@sveltejs/kit/src/runtime/server/respond.js:480:13)
+    at resolve (C:/git/course/sveltekit-hasura/node_modules/@sveltejs/kit/src/runtime/server/respond.js:282:5)
+    at #options.hooks.handle (C:/git/course/sveltekit-hasura/node_modules/@sveltejs/kit/src/runtime/server/index.js:56:56)
+    at Module.respond (C:/git/course/sveltekit-hasura/node_modules/@sveltejs/kit/src/runtime/server/respond.js:279:40)

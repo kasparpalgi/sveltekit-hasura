@@ -20,5 +20,9 @@
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@nhost/nhost-js": "^2.2.13",
+		"graphql": "^16.7.1"
+	}
 }
