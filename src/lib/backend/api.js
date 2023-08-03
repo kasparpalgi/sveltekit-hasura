@@ -2,8 +2,10 @@ import { NhostClient } from "@nhost/nhost-js";
 import { writable } from "svelte/store";
 
 export const nhostClient = new NhostClient({
-  subdomain: 'local',
-  region: 'eu-central-1'
+    authUrl: 'https://nhost.crewnew.com/v1/auth',
+    storageUrl: 'https://nhost.crewnew.com/v1/storage',
+    graphqlUrl: 'https://nhost.crewnew.com/v1/graphql',
+    functionsUrl: 'https://nhost.crewnew.com/v1/functions'
 })
 
 // store
