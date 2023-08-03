@@ -7,12 +7,15 @@
 	let error = '';
 
 	async function register(event) {
-		event.preventDefault(); // Tell Svelte not to take the HTML form’s default action so we can code the logic ourselves.
-		try {
-			await nhostClient.auth.signUp({ email, password });
+		event.preventDefault();
+
+		const result = await nhostClient.auth.signUp({ email, password });
+
+		// Check if the signup was successful
+		if (result && result.status === 'success') {
 			goto('/account');
-		} catch (err) {
-			error = err.message;
+		} else {
+			error = result.error.message; // If signup was not successful, set the error message accordingly
 		}
 	}
 </script>
@@ -28,7 +31,13 @@
 		<input bind:value={password} type="password" name="password" required />
 	</p>
 	{#if error}
-		<p>{error}</p>
+		<p class="error">{error}</p>
 	{/if}
 	<button type="submit">SignUp</button>
 </form>
+
+<style>
+	.error {
+		color: red;
+	}
+</style>
