@@ -5,6 +5,7 @@
 	import { user } from '$lib/backend/api';
 
 	let userInfo = '';
+    let avatarUrl = '';
 
 	$: {
 		user.subscribe((value) => {
@@ -18,6 +19,18 @@
 		}
 	});
 
+    async function upload(event) {
+        event.preventDefault();
+        
+        const { storage } = await nhostClient.storage.upload({ avatarUrl });
+
+        console.log('Store: ',storage);
+
+        // await nhostClient.auth.updateProfile({
+        //     avatar_url: url
+        // });
+    }
+
 	async function logOut() {
 		await nhostClient.auth.signOut();
 		goto('/');
@@ -25,4 +38,13 @@
 </script>
 
 <h1>Heya {userInfo.displayName}!</h1>
-<button on:click={logOut}>Logout</button>
+<form on:submit={upload}>
+	<strong>Upload profile picture:</strong><br />
+	<input bind:value={avatarUrl} type="file" accept="image/*" />
+	<br />
+	<input type="submit" value="Upload Image" />
+</form>
+
+<p>
+	<button on:click={logOut}>Logout</button>
+</p>
