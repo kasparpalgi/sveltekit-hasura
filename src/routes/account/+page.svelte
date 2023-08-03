@@ -20,19 +20,19 @@
 	});
 
 	async function upload(event) {
-		event.preventDefault();
+        event.preventDefault();
 
-		if (file) {
-			try {
-				await nhostClient.storage.upload({ file });
-				console.log('File uploaded successfully');
-			} catch (err) {
-				console.log('Error uploading file:', err);
-			}
-		} else {
-			console.log('No file selected');
-		}
-	}
+        if (file) {
+            try {
+                await nhostClient.storage.upload({ file });
+                console.log('File uploaded successfully');
+            } catch (err) {
+                console.log('Error uploading file:', err);
+            }
+        } else {
+            console.log('No file selected');
+        }
+    }
 
 	function handleFileSelect(event) {
 		file = event.target.files[0];
