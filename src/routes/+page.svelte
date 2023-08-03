@@ -1,27 +1,18 @@
 <script>
-	import { goto } from '$app/navigation';
-	import { nhostClient } from '$lib/backend/api';
+	import { isSignedIn } from '$lib/backend/api';
 
-	let email = '';
-	let password = '';
-	let error = '';
+	let signedIn;
 
-	async function register(event) {
-    event.preventDefault();
-    try {
-        await nhostClient.auth.signUp({ email, password });
-        goto('/account');
-    } catch (err) {
-        error = err.message;
-    }
-}
+	isSignedIn.subscribe((value) => {
+		signedIn = value;
+	});
 </script>
 
-<form on:submit={register}>
-	<input bind:value={email} placeholder="Email" required />
-	<input bind:value={password} type="password" placeholder="Password" required />
-	{#if error}
-		<p>{error}</p>
+<h1>SvelteKit + NHost Stack (Hasura, Hasura Auth, Hasura Storage & Hasura Functions)</h1>
+<p>
+	{#if signedIn}
+		<a href="/account">My account➡️</a>
+	{:else}
+		<a href="/auth">Register or login here➡️</a>
 	{/if}
-	<button type="submit">Register</button>
-</form>
+</p>

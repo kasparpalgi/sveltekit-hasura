@@ -8,12 +8,14 @@ export const nhostClient = new NhostClient({
     functionsUrl: 'https://nhost.crewnew.com/v1/functions'
 })
 
-// store
+// Create 2 Svelte stores that’s values can be read and written from anywhere in the app 
 export const isSignedIn = writable(null);
 export const user = writable(null);
 
+// We're using below the nhostClient.auth.onAuthStateChanged to listen for changes in the user's auth state. If a user signs in or out, this will be triggered, updating the "isSignedIn" and "user" stores accordingly. 
 nhostClient.auth.onAuthStateChanged(
     (event, session) => {
+        // First, let us console log the state and the session info with JWT 		and the user info if signed up or logged in 
         console.log(`auth state changed. State is now ${event} with session: `, session);
         if (event === 'SIGNED_IN') {
             isSignedIn.set(true);

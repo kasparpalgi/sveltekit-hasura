@@ -5,7 +5,6 @@
 	let error = '';
 
 	async function logOut() {
-    event.preventDefault();
     try {
         await nhostClient.auth.signOut();
         goto('/');
