@@ -9,11 +9,12 @@
 	async function register(event) {
 		event.preventDefault();
 
+        // Sign up the user with the email and password
 		const result = await nhostClient.auth.signUp({ email, password });
 
 		// Check if the signup was successful
 		if (result && result.status === 'success') {
-			goto('/account');
+			goto('/account'); // If successful redirect to the account page
 		} else {
 			error = result.error.message; // If signup was not successful, set the error message accordingly
 		}
