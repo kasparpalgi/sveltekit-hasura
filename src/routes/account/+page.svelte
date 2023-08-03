@@ -5,7 +5,7 @@
 	import { user } from '$lib/backend/api';
 
 	let userInfo = '';
-    let avatarUrl = '';
+	let file;
 
 	$: {
 		user.subscribe((value) => {
@@ -19,17 +19,28 @@
 		}
 	});
 
-    async function upload(event) {
-        event.preventDefault();
-        
-        const { storage } = await nhostClient.storage.upload({ avatarUrl });
+	async function upload(event) {
+		event.preventDefault();
 
-        console.log('Store: ',storage);
+		if (file) {
+			try {
+				await nhostClient.storage.upload({ file });
+				console.log('File uploaded successfully');
+			} catch (err) {
+				console.log('Error uploading file:', err);
+			}
+		} else {
+			console.log('No file selected');
+		}
+	}
 
-        // await nhostClient.auth.updateProfile({
-        //     avatar_url: url
-        // });
-    }
+	function handleFileSelect(event) {
+		file = event.target.files[0];
+	}
+
+	// await nhostClient.auth.updateProfile({
+	//     avatar_url: url
+	// });
 
 	async function logOut() {
 		await nhostClient.auth.signOut();
@@ -40,7 +51,7 @@
 <h1>Heya {userInfo.displayName}!</h1>
 <form on:submit={upload}>
 	<strong>Upload profile picture:</strong><br />
-	<input bind:value={avatarUrl} type="file" accept="image/*" />
+	<input type="file" accept="image/*" on:change={handleFileSelect} />
 	<br />
 	<input type="submit" value="Upload Image" />
 </form>
