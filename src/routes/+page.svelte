@@ -1,8 +1,9 @@
 <script>
-	import { isSignedIn } from '$lib/backend/api';
+	import { isSignedIn } from '$lib/backend/api'; // Import the isSignedIn store
 
 	let signedIn;
 
+	// Subscribe to the isSignedIn store and set the signedIn variable accordingly
 	isSignedIn.subscribe((value) => {
 		signedIn = value;
 	});
